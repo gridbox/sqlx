@@ -1,5 +1,5 @@
 use std::cmp::Ordering;
-use std::ffi::CStr;
+use std::ffi::{c_char, CStr};
 use std::fmt::Write;
 use std::fmt::{self, Debug, Formatter};
 use std::os::raw::{c_int, c_void};
@@ -261,8 +261,8 @@ where
 extern "C" fn update_hook<F>(
     callback: *mut c_void,
     op_code: c_int,
-    database: *const i8,
-    table: *const i8,
+    database: *const c_char,
+    table: *const c_char,
     rowid: i64,
 ) where
     F: FnMut(UpdateHookResult),
